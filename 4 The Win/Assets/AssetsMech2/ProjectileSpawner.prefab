@@ -41,6 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 819841368983016773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322aae267e247ba45bd3d19756f8a481, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cd34d43058e8274599ef4c69ba44c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Projectile: {fileID: 0}
+  randSeed: 0
+  qtdProjectiles: 0
+  timeBetweenSpawns: 0
