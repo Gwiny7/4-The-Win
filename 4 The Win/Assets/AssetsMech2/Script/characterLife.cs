@@ -30,4 +30,8 @@ public class characterLife : MonoBehaviour
         }
     }
 
+    public int GetLife(){
+        return hitPoints;
+    }
+
 }
