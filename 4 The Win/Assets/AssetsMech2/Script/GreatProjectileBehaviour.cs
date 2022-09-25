@@ -9,6 +9,7 @@ public class GreatProjectileBehaviour : MonoBehaviour
     public GameObject deadProjectile;
     float angle;
     public int projectileHP;
+    private bool isDead = false;
 
 
     void Start(){
@@ -27,8 +28,9 @@ public class GreatProjectileBehaviour : MonoBehaviour
         projectileHP--;
         if(projectileHP<=0)
         {
-        Destroy(this.gameObject);
-        Instantiate(deadProjectile,transform.position,transform.rotation);
+            Destroy(this.gameObject);
+            Instantiate(deadProjectile,transform.position,transform.rotation);
+            isDead = true;
         }
         
 
@@ -51,5 +53,9 @@ public class GreatProjectileBehaviour : MonoBehaviour
         }
         //Debug.Log(angle);
         transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
+    }
+
+    public bool GetStatus(){
+        return isDead;
     }
 }

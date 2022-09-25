@@ -9,9 +9,9 @@ public class lifeStatus : MonoBehaviour
     private int lifePoints;
     private bool lose;
     private bool win;
-    private int qtdProjectiles;
     public TextMeshProUGUI lifeText;
     public GameObject gameOverPanel;
+    public GameObject victoryPanel;
 
 
     void Start(){
@@ -23,7 +23,7 @@ public class lifeStatus : MonoBehaviour
     {   
         updateLifePoints();
         updateGameOver();
-        updateQtdProjectiles();
+        updateVictory();
     }
 
 
@@ -38,17 +38,23 @@ public class lifeStatus : MonoBehaviour
           FindObjectOfType<ProjectileSpawner>().SetStatus(false);
         }
     }
+    
 
-    void updateQtdProjectiles(){
-        if(qtdProjectiles <= 2  && FindObjectOfType<ProjectileSpawner>().ProjectileLeft() == 0)
-        {
+    private void updateVictory(){
+        if(FindObjectOfType<GreatProjectileBehaviour>())
+        {   if(FindObjectOfType<GreatProjectileBehaviour>().GetStatus())
+            {
             win = true;
-            gameOverPanel.SetActive(true);
+            victoryPanel.SetActive(true);
+            }
         }
     }
+    // void updateVictory(){
+    //     // if(FindObjectOfType<GreatProjectileBehaviour>().GetStatus())
+    //     // {   win = true;
+    //     //     victoryPanel.SetActive(true);
+    //     // }
+    // }
 
-    public void hitProjectile(){
-        qtdProjectiles--;
-    }
 }
 

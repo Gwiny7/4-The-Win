@@ -29,7 +29,6 @@ public class ProjectileMovement : MonoBehaviour
     private void OnMouseDown() {
         Destroy(this.gameObject);
         Instantiate(deadProjectile,transform.position,transform.rotation);
-        FindObjectOfType<lifeStatus>().hitProjectile();
     }
 
     private void Move(){

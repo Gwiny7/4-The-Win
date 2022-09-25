@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819841368983016772}
-  - component: {fileID: 6131951216980203191}
+  - component: {fileID: 5398334051303883115}
   m_Layer: 0
   m_Name: ProjectileSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &6131951216980203191
+--- !u!114 &5398334051303883115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 819841368983016773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd34d43058e8274599ef4c69ba44c69, type: 3}
+  m_Script: {fileID: 11500000, guid: c118bfa5e824cb54fbf8380db8e1ff24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 0}
+  Alert: {fileID: 0}
+  GreatProjectile: {fileID: 0}
   randSeed: 0
   qtdProjectiles: 0
   timeBetweenSpawns: 0
+  alertTimer: 0
+  blessed: 0
