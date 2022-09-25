@@ -21,7 +21,7 @@ public class GreatProjectileBehaviour : MonoBehaviour
     void Update(){
         Move();
         Rotate();
-        
+        updateLose();
     }
 
     private void OnMouseDown() {
@@ -57,5 +57,13 @@ public class GreatProjectileBehaviour : MonoBehaviour
 
     public bool GetStatus(){
         return isDead;
+    }
+
+    private void updateLose(){
+        if(!FindObjectOfType<ProjectileSpawner>().GetStatus())
+        {
+            Destroy(this.gameObject);
+            Instantiate(deadProjectile,transform.position,transform.rotation);
+        }
     }
 }

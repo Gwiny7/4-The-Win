@@ -23,7 +23,7 @@ public class ProjectileMovement : MonoBehaviour
     void Update(){
         Move();
         Rotate();
-        
+        updateLose();
     }
 
     private void OnMouseDown() {
@@ -50,5 +50,12 @@ public class ProjectileMovement : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
     }
 
+    private void updateLose(){
+        if(!FindObjectOfType<ProjectileSpawner>().GetStatus())
+        {
+            Destroy(this.gameObject);
+            Instantiate(deadProjectile,transform.position,transform.rotation);
+        }
+    }
 }
 
