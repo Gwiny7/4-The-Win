@@ -6,6 +6,7 @@ public class ProjectileSpawner : MonoBehaviour
 {
     public GameObject Projectile;
     public GameObject Alert;
+    public GameObject GreatProjectile;
     
     private Vector3[] spawnPoints = { new Vector3 { x = 13f, y = 2f, z = 0f}, 
                              new Vector3 { x = 12f, y = 5f,z = 0f},
@@ -24,9 +25,11 @@ public class ProjectileSpawner : MonoBehaviour
     private Vector3 alertPosition;
     public bool blessed;
     private bool isAlive;
+    private int projectileLeft;
     
     void Start()
     {   isAlive = true;
+        projectileLeft = qtdProjectiles;
         Random.seed = randSeed;
         StartCoroutine(spawnProjectiles());
     }
@@ -57,8 +60,15 @@ public class ProjectileSpawner : MonoBehaviour
                     Instantiate(Alert,alertPosition,Quaternion.identity);
                     yield return new WaitForSeconds(alertTimer);
                 }
-                Instantiate(Projectile,transform.position,transform.rotation);
-                yield return new WaitForSeconds(timeBetweenSpawns);
+                    if(i==qtdProjectiles-1){
+                        Instantiate(GreatProjectile,transform.position,transform.rotation);
+                        yield return new WaitForSeconds(timeBetweenSpawns);
+                    }
+                    else{
+                        Instantiate(Projectile,transform.position,transform.rotation);
+                        projectileLeft--;
+                        yield return new WaitForSeconds(timeBetweenSpawns);
+                    }
                 }
                 else{
                     StopCoroutine(spawnProjectiles());
@@ -74,5 +84,9 @@ public class ProjectileSpawner : MonoBehaviour
     }
     public void SetStatus(bool status){
         isAlive = status;
+    }
+
+    public int ProjectileLeft(){
+        return projectileLeft;
     }
 }

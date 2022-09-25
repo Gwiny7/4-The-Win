@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMovement : MonoBehaviour
+public class GreatProjectileBehaviour : MonoBehaviour
 {
-    //
     public float projectileSpeed;
     GameObject target;
     public GameObject deadProjectile;
     float angle;
-
-   
-
+    public int projectileHP;
 
 
     void Start(){
@@ -27,9 +24,14 @@ public class ProjectileMovement : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        projectileHP--;
+        if(projectileHP<=0)
+        {
         Destroy(this.gameObject);
         Instantiate(deadProjectile,transform.position,transform.rotation);
-        FindObjectOfType<lifeStatus>().hitProjectile();
+        }
+        
+
     }
 
     private void Move(){
@@ -50,6 +52,4 @@ public class ProjectileMovement : MonoBehaviour
         //Debug.Log(angle);
         transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
     }
-
 }
-
