@@ -3,24 +3,116 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public TMP_InputField createInput;
     public TMP_InputField joinInput;
+    public GameObject lobbyPanel;
+    public GameObject roomPanel;
+    public TMP_Text roomName;
+    public List<PlayerItem> playerItemsList = new List<PlayerItem>();
+    public PlayerItem playerItemPrefab;
+    public Transform playerItemParent;
+
+    public GameObject playButton;
+
+    private void Awake(){
+        PhotonNetwork.JoinLobby();
+    }
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(createInput.text);
+        if(createInput.text.Length >= 1){
+            PhotonNetwork.CreateRoom(createInput.text, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true});
+        }
     }
 
-    public void JoinRoom(){
-        PhotonNetwork.JoinRoom(joinInput.text);
+    public void JoinRoom()
+    {
+        if(joinInput.text.Length >= 1){
+            PhotonNetwork.JoinRoom(joinInput.text);
+        }
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Lobby");
+        lobbyPanel.SetActive(false);
+        roomPanel.SetActive(true);
+        roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdatePlayerList();
+    }
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        roomPanel.SetActive(false);
+        lobbyPanel.SetActive(true);
+        UpdatePlayerList();
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby();
+        UpdatePlayerList();
+    }
+
+    public void UpdatePlayerList()
+    {
+        foreach (PlayerItem item in playerItemsList)
+        {
+            Destroy(item.gameObject);
+        }
+        playerItemsList.Clear();
+
+        if(PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        foreach(KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
+            newPlayerItem.SetPlayerInfo(player.Value);
+            
+            if(player.Value == PhotonNetwork.LocalPlayer)
+            {
+                newPlayerItem.ApplyLocalChanges();
+            }
+            
+            playerItemsList.Add(newPlayerItem);
+        }
+    }
+
+    private void Update()
+    {
+        if(PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            playButton.SetActive(true);
+        }
+        else
+        {
+            playButton.SetActive(false);
+        }
+    }
+
+    public void OnClickPlayButton()
+    {
+        PhotonNetwork.LoadLevel("Game");
     }
 }
