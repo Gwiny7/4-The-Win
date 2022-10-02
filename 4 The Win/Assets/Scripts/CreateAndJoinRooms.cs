@@ -8,8 +8,7 @@ using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField createInput;
-    public TMP_InputField joinInput;
+    public TMP_InputField roomInput;
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public TMP_Text roomName;
@@ -25,15 +24,15 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        if(createInput.text.Length >= 1){
-            PhotonNetwork.CreateRoom(createInput.text, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true});
+        if(roomInput.text.Length >= 1){
+            PhotonNetwork.CreateRoom(roomInput.text, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true});
         }
     }
 
     public void JoinRoom()
     {
-        if(joinInput.text.Length >= 1){
-            PhotonNetwork.JoinRoom(joinInput.text);
+        if(roomInput.text.Length >= 1){
+            PhotonNetwork.JoinRoom(roomInput.text);
         }
     }
 
