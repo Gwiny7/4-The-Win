@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using TMPro;
 
@@ -108,6 +109,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             playButton.SetActive(false);
         }
+        Debug.Log(PhotonNetwork.MasterClient.GetPlayerNumber());
     }
 
     public void OnClickPlayButton()
