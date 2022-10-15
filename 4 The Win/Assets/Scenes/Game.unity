@@ -1308,9 +1308,9 @@ MonoBehaviour:
   Projectile: {fileID: 1058013540299751320, guid: 8e5471cf86dbda146a9da8d6da585229, type: 3}
   Alert: {fileID: 7427701339308317372, guid: 6bab5d4f66f899e4eb9227ea057b5a90, type: 3}
   GreatProjectile: {fileID: 1058013540299751320, guid: feb375d21160efa42966cdcf09c4644a, type: 3}
-  randSeed: 4
+  randSeed: 5
   qtdProjectiles: 16
-  timeBetweenSpawns: 1
+  timeBetweenSpawns: 0.5
   alertTimer: 0.2
   blessed: 1
 --- !u!1 &2061052844

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum ObjectType{circle,square,triangle,cross,diamond}
+public enum ObjectType{circle,square,triangle,cross,diamond,heart,star}
 
 public class ObjectData : MonoBehaviour
 {
@@ -17,5 +17,10 @@ public class ObjectData : MonoBehaviour
 
     public int getQtd(){
         return qtdObj;
+    }
+
+    public void Plus()
+    {
+        qtdObj++;
     }
 }
