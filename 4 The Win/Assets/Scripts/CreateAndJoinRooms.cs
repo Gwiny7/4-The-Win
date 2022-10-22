@@ -16,6 +16,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
+    public int[] PlayersActorOrder = { 0, 0, 0, 0 };
 
     public GameObject playButton;
 
@@ -42,16 +43,19 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
+        JoinPlayerArray();
         UpdatePlayerList();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        AddPlayerOnArray(newPlayer);
         UpdatePlayerList();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        DeletePlayerOnArray(otherPlayer);
         UpdatePlayerList();
     }
     public void LeaveRoom()
@@ -63,6 +67,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         roomPanel.SetActive(false);
         lobbyPanel.SetActive(true);
+        LeavePlayerArray();
         UpdatePlayerList();
     }
 
@@ -97,6 +102,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             
             playerItemsList.Add(newPlayerItem);
         }
+        for(int i = 0; i < 4; i++){
+            Debug.Log("Player" + (i + 1) + " Actor Number: " + PlayersActorOrder[i] + ";");
+        }
     }
 
     private void Update()
@@ -109,11 +117,47 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             playButton.SetActive(false);
         }
-        Debug.Log(PhotonNetwork.MasterClient.GetPlayerNumber());
     }
 
     public void OnClickPlayButton()
     {
         PhotonNetwork.LoadLevel("Game");
+    }
+
+    private void JoinPlayerArray(){
+        foreach(Player player in PhotonNetwork.PlayerList){
+            AddPlayerOnArray(player);
+        }
+    }
+
+    private void LeavePlayerArray(){
+        for(int i = 0; i < 4; i++){
+            PlayersActorOrder[i] = 0;
+        }
+    }
+
+    private void AddPlayerOnArray(Player player){
+        for(int i = 0; i < 4; i++){
+            if(PlayersActorOrder[i] == 0){
+                PlayersActorOrder[i] = player.ActorNumber;
+                return;
+            }
+        }
+    }
+
+    private void DeletePlayerOnArray(Player player){
+        for(int i = 0; i < 4; i++){
+            if(player.ActorNumber == PlayersActorOrder[i]){
+                for(int x = i; x < 4; x++){
+                    if(x < 3){
+                        PlayersActorOrder[x] = PlayersActorOrder[x+1];
+                    }
+                    else{
+                        PlayersActorOrder[x] = 0;
+                        return;
+                    }
+                }
+            }
+        }
     }
 }
