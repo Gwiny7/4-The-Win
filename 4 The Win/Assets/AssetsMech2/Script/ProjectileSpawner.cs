@@ -89,4 +89,8 @@ public class ProjectileSpawner : MonoBehaviour
     public int ProjectileLeft(){
         return projectileLeft;
     }
+
+    public void SetBlessed(bool state){
+        blessed = state;
+    }
 }

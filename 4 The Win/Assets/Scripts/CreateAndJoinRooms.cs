@@ -121,6 +121,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
+        for(int i = 0; i < 4; i++){
+            PlayerArrayControl.PlayersActorOrder[i] = PlayersActorOrder[i];
+        }
         PhotonNetwork.LoadLevel("Game");
     }
 
