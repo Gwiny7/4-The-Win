@@ -9,6 +9,7 @@ public class UnlockButton : MonoBehaviour
     private int[] password = new int[4];
     public bool correctPassword = false;
     public GameObject[] locks = new GameObject[4];
+    
     void Start()
     {   
         for(int i = 0;i<4;i++)
@@ -39,7 +40,7 @@ public class UnlockButton : MonoBehaviour
         else
         {
             wrongPassword();
-            Debug.Log("Senha Incorreta");
+            FindObjectOfType<ChancesLeft>().lostLife();
         }
         
     }
