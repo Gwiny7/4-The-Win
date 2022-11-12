@@ -844,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 760930544}
   - component: {fileID: 760930545}
+  - component: {fileID: 760930546}
   m_Layer: 0
   m_Name: CreateAndJoinRooms
   m_TagString: Untagged
@@ -885,7 +886,30 @@ MonoBehaviour:
   playerItemsList: []
   playerItemPrefab: {fileID: 6187710861972846136, guid: 1a8045f925c077e4f84bed992f54aece, type: 3}
   playerItemParent: {fileID: 1850128329}
+  PlayersActorOrder: 00000000000000000000000000000000
   playButton: {fileID: 1306150806}
+--- !u!114 &760930546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760930543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &904241710
 GameObject:
   m_ObjectHideFlags: 0

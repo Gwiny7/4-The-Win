@@ -13,6 +13,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public TMP_Text roomName;
+    private PhotonView PV;
     public List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
@@ -22,6 +23,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     private void Awake(){
         PhotonNetwork.JoinLobby();
+        PV = GetComponent<PhotonView>();
     }
 
     public void CreateRoom()
@@ -121,9 +123,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
-        for(int i = 0; i < 4; i++){
-            PlayerArrayControl.PlayersActorOrder[i] = PlayersActorOrder[i];
-        }
+        PV.RPC("RPC_ListPlayers", RpcTarget.AllBuffered);
         PhotonNetwork.LoadLevel("Game");
     }
 
@@ -161,6 +161,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                     }
                 }
             }
+        }
+    }
+
+    [PunRPC]
+    void RPC_ListPlayers(){
+        for(int i = 0; i < 4; i++){
+            PlayerArrayControl.PlayersActorOrder[i] = PlayersActorOrder[i];
         }
     }
 }

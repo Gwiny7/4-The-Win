@@ -47,7 +47,7 @@ public class ProjectileSpawner : MonoBehaviour
             for(int i=0 ; i<qtdProjectiles ; i++)
             {  
                 if(isAlive){
-                Debug.Log(isAlive);
+                //Debug.Log(isAlive);
                 randSpawner = Random.Range(0,8);
                 //Debug.Log(randSpawner);
                 transform.position = spawnPoints[randSpawner];

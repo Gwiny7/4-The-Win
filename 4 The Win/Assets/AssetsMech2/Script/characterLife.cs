@@ -26,7 +26,7 @@ public class characterLife : MonoBehaviour
         if(col.gameObject.tag=="Projectile"){
             Destroy(col.gameObject);
             hitPoints--;
-            Debug.Log("Ainda tem:" + hitPoints);
+            //Debug.Log("Ainda tem:" + hitPoints);
         }
     }
 
