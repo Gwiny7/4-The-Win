@@ -23,12 +23,15 @@ public class ProjectileSpawner : MonoBehaviour
     public float timeBetweenSpawns;
     public float alertTimer;
     private Vector3 alertPosition;
+    public blessStatus BS;
     public bool blessed;
     private bool isAlive;
     private int projectileLeft;
     
     void Start()
-    {   isAlive = true;
+    {   
+        blessed = BS.IsBlessed();
+        isAlive = true;
         projectileLeft = qtdProjectiles;
         Random.seed = randSeed;
         StartCoroutine(spawnProjectiles());
@@ -37,7 +40,7 @@ public class ProjectileSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       blessed = BS.IsBlessed();
     }
 
 
@@ -88,9 +91,5 @@ public class ProjectileSpawner : MonoBehaviour
 
     public int ProjectileLeft(){
         return projectileLeft;
-    }
-
-    public void SetBlessed(bool state){
-        blessed = state;
     }
 }

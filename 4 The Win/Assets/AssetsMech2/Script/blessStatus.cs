@@ -13,43 +13,46 @@ public class blessStatus : MonoBehaviourPunCallbacks
     private PhotonView PV;
     private int RandomValue;
     private int BlessedActorNumber;
+    private bool isBlessed = false;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
-        Seed = 1;
-        //Seed = (int)Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
+        Seed = (int)Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
+        
         if(PhotonNetwork.IsMasterClient){
-            PV.RPC("RPC_PassBlessed", RpcTarget.AllBuffered, Seed);
+            //Seed = (int)Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
+            BlessedActorNumber = PlayerArrayControl.PlayersActorOrder[Seed];
+            PV.RPC("RPC_PassBlessed", RpcTarget.AllBuffered, BlessedActorNumber);
         }
 
-        Debug.Log(BlessedActorNumber);
-        //Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
-    }
-
-    void Start(){
         if(PhotonNetwork.LocalPlayer.ActorNumber == BlessedActorNumber){
-            LocalPlayer.SetBlessed(true);
+            isBlessed = true;
         }
 
         else{
-            LocalPlayer.SetBlessed(false);
+            isBlessed = false;
         }
     }
 
     void Update(){
         if(PhotonNetwork.LocalPlayer.ActorNumber == BlessedActorNumber){
-            LocalPlayer.SetBlessed(true);
+            isBlessed = true;
         }
 
         else{
-            LocalPlayer.SetBlessed(false);
+            isBlessed = false;
         }
     }
     
+    public bool IsBlessed(){
+        return isBlessed;
+    }
+
     [PunRPC]
     void RPC_PassBlessed(int num){
-        BlessedActorNumber = PlayerArrayControl.PlayersActorOrder[num];
-        Debug.Log(BlessedActorNumber);
+        BlessedActorNumber = num;
+        Debug.Log("Player Local: " + PhotonNetwork.LocalPlayer.ActorNumber);
+        Debug.Log("Player Abençoado: " + BlessedActorNumber);
     }
 }

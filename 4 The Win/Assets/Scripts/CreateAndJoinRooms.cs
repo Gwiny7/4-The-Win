@@ -124,7 +124,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public void OnClickPlayButton()
     {
         PV.RPC("RPC_ListPlayers", RpcTarget.AllBuffered);
-        PhotonNetwork.LoadLevel("Game");
+        PhotonNetwork.LoadLevel(2);
     }
 
     private void JoinPlayerArray(){

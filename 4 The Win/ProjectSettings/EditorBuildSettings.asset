@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: c886483fd2cd58546b5bc9cb8194949c
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Mecanica2.unity
     guid: 6cf11e6fbdfe6844c9d09b196575fa88
   m_configObjects: {}
