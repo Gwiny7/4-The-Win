@@ -13,6 +13,7 @@ public class MapCreation : MonoBehaviour
     private Vector3 initPosition;
     private Vector2 safePoint;
     public int randSeed;
+    
 
     void Start()
     {

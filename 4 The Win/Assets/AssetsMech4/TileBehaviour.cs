@@ -11,9 +11,12 @@ public class TileBehaviour : MonoBehaviour
     private Vector2 safePoint;
     private GameObject canvas;
     public Image image;
-
+    public bool blessed;
+    
     void Start()
     {
+        blessed = FindObjectOfType<PlayerStatus>().blessed;
+        
        // transform.SetParent(canvas.transform,false);
     }
 
@@ -37,9 +40,11 @@ public class TileBehaviour : MonoBehaviour
     {
         return isSafe;
     }
+
     public void testClick()
-    {
-        Debug.Log(isSafe);
+    {   if(FindObjectOfType<PlayerStatus>().tryLeft > 0)
+        {
+            Debug.Log(isSafe);
 
         Vector2 safePos = FindObjectOfType<MapCreation>().getSafeLocation();
         int distX,distY;
@@ -49,13 +54,14 @@ public class TileBehaviour : MonoBehaviour
         distX = Mathf.Abs(distX);
         distY = (int)tilePos.y - (int)safePos.y;
         distY = Mathf.Abs(distY);
-
-        if(tilePos == safePos)
+        if(blessed)
         {
+            if(tilePos == safePos)
+            {
             image.GetComponent<Image>().color = Color.cyan;
-        }
-        else if(distX >= distY)
-        {
+            }
+            else if(distX >= distY)
+            {
             if(distX>5)
             {
             image.GetComponent<Image>().color = Color.yellow;
@@ -66,8 +72,8 @@ public class TileBehaviour : MonoBehaviour
             }
             
 
-        }
-        else{
+            }
+            else{
             if(distY>5)
             {
             image.GetComponent<Image>().color = Color.yellow;
@@ -77,7 +83,16 @@ public class TileBehaviour : MonoBehaviour
             image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distY-5)*0.23f,0.016f - Mathf.Abs(distY-5)*0.004f,1f);
             }
             
+            }
         }
+        else{
+            image.GetComponent<Image>().color = Color.gray;
+        }
+
+        FindObjectOfType<PlayerStatus>().Try();
+        }
+        
+        
 
 
         // switch(isSafe)
