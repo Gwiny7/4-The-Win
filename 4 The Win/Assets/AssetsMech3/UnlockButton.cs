@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class UnlockButton : MonoBehaviour
 {
@@ -9,6 +13,7 @@ public class UnlockButton : MonoBehaviour
     private int[] password = new int[4];
     public bool correctPassword = false;
     public GameObject[] locks = new GameObject[4];
+    public PhotonView PV;
     
     void Start()
     {   
@@ -36,11 +41,11 @@ public class UnlockButton : MonoBehaviour
         if(CheckPassword())
         {
             Debug.Log("Acertou");
+            PV.RPC("RPC_Victory", RpcTarget.AllBuffered);
         }
         else
         {
             wrongPassword();
-            FindObjectOfType<ChancesLeft>().lostLife();
         }
         
     }
@@ -68,6 +73,6 @@ public class UnlockButton : MonoBehaviour
 
     public void wrongPassword()
     {
-        
+        FindObjectOfType<ChancesLeft>().lostLife();
     }
 }

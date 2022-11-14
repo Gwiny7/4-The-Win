@@ -42,6 +42,8 @@ MonoBehaviour:
   - RPC_PassSeed
   - RPC_PassBlessed
   - RPC_ListPlayers
+  - testClick
+  - RPC_Victory
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -84,6 +84,10 @@ public class MapCreation : MonoBehaviour
         return safePoint;
     }
 
+    public GameObject GetTile(int x, int y){
+        return tileMap[x,y];
+    }
+
     //  Vector2 gridSize;
     //  GameObject[][] gridOfGameObjects;
      

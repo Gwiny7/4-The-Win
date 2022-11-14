@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 using TMPro;
 
 public class lifeStatus : MonoBehaviour
@@ -12,7 +15,8 @@ public class lifeStatus : MonoBehaviour
     public TextMeshProUGUI lifeText;
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
-
+    public GameObject nextButton;
+    public GameObject nextButtonDeath;
 
     void Start(){
         lose = false;
@@ -36,6 +40,9 @@ public class lifeStatus : MonoBehaviour
         { lose = true;
           gameOverPanel.SetActive(true);
           FindObjectOfType<ProjectileSpawner>().SetStatus(false);
+          if(PhotonNetwork.IsMasterClient){
+                nextButtonDeath.SetActive(true);
+            }
         }
     }
     
@@ -46,6 +53,9 @@ public class lifeStatus : MonoBehaviour
             {
             win = true;
             victoryPanel.SetActive(true);
+            if(PhotonNetwork.IsMasterClient){
+                nextButton.SetActive(true);
+            }
             }
         }
     }
