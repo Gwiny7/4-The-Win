@@ -10,6 +10,7 @@ using TMPro;
 public class lifeStatus : MonoBehaviour
 {
     private int lifePoints;
+    private int victoriesNeeded;
     private bool lose;
     private bool win;
     public TextMeshProUGUI lifeText;
@@ -17,8 +18,11 @@ public class lifeStatus : MonoBehaviour
     public GameObject victoryPanel;
     public GameObject nextButton;
     public GameObject nextButtonDeath;
+    private PhotonView PV;
 
     void Start(){
+        victoriesNeeded = PhotonNetwork.CurrentRoom.PlayerCount - 1;
+        PV = GetComponent<PhotonView>();
         lose = false;
         win = false;
         lifePoints = FindObjectOfType<characterLife>().GetLife();
@@ -28,6 +32,10 @@ public class lifeStatus : MonoBehaviour
         updateLifePoints();
         updateGameOver();
         updateVictory();
+        if(PhotonNetwork.IsMasterClient && victoriesNeeded <= 0){
+            nextButton.SetActive(true);
+            nextButtonDeath.SetActive(true);
+        }
     }
 
 
@@ -40,9 +48,6 @@ public class lifeStatus : MonoBehaviour
         { lose = true;
           gameOverPanel.SetActive(true);
           FindObjectOfType<ProjectileSpawner>().SetStatus(false);
-          if(PhotonNetwork.IsMasterClient){
-                nextButtonDeath.SetActive(true);
-            }
         }
     }
     
@@ -51,11 +56,11 @@ public class lifeStatus : MonoBehaviour
         if(FindObjectOfType<GreatProjectileBehaviour>())
         {   if(FindObjectOfType<GreatProjectileBehaviour>().GetStatus())
             {
-            win = true;
-            victoryPanel.SetActive(true);
-            if(PhotonNetwork.IsMasterClient){
-                nextButton.SetActive(true);
-            }
+                if(!win){
+                    PV.RPC("RPC_PlayerWin", RpcTarget.AllBuffered);
+                }
+                win = true;
+                victoryPanel.SetActive(true);
             }
         }
     }
@@ -65,6 +70,10 @@ public class lifeStatus : MonoBehaviour
     //     //     victoryPanel.SetActive(true);
     //     // }
     // }
+    [PunRPC]
 
+    void RPC_PlayerWin(){
+        victoriesNeeded--;
+    }
 }
 

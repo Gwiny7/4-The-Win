@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerStatus : MonoBehaviour
 {
     private blessStatus BS;
+    private PhotonView PV;
     private bool blessed;
     public int maxTry;
     public int tryLeft;
@@ -17,6 +18,7 @@ public class PlayerStatus : MonoBehaviour
     public TMP_Text tryStatus;
     
     void Awake(){
+        PV = GetComponent<PhotonView>();
         BS = GetComponent<blessStatus>();
     }
     void Start()
@@ -57,6 +59,12 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void SetVictory(){
+        PV.RPC("RPC_Victory", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+
+    void RPC_Victory(){
         victoryScreen.SetActive(true);
     }
 }

@@ -44,6 +44,7 @@ MonoBehaviour:
   - RPC_ListPlayers
   - testClick
   - RPC_Victory
+  - RPC_PlayerWin
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
