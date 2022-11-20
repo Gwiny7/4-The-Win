@@ -10,7 +10,10 @@ public class ManageRoom : MonoBehaviourPunCallbacks
 {
     public void OnClickExit(){
         PhotonNetwork.LeaveRoom();
-        
+    }
+
+    public void OnClickAdvance(int level){
+        PhotonNetwork.LoadLevel(level);
     }
 
     public override void OnLeftRoom(){

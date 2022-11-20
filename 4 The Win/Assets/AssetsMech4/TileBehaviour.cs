@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 public class TileBehaviour : MonoBehaviour
 {   
-    
     private Vector2 tilePos;
     private bool isSafe = false;
     private Vector2 safePoint;
     private GameObject canvas;
     public Image image;
-    public bool blessed;
+    private bool blessed;
+    public PhotonView PV;
+    private PlayerStatus PS;
+    
     
     void Start()
     {
-        blessed = FindObjectOfType<PlayerStatus>().blessed;
-        
+        PS = GameObject.Find("StatusManager").GetComponent<PlayerStatus>();
+        PV = GameObject.Find("StatusManager").GetComponent<PhotonView>();
+        StartCoroutine(Wait(5.0f));        
        // transform.SetParent(canvas.transform,false);
     }
 
@@ -41,8 +47,23 @@ public class TileBehaviour : MonoBehaviour
         return isSafe;
     }
 
-    public void testClick()
-    {   if(FindObjectOfType<PlayerStatus>().tryLeft > 0)
+    public void OnClickBlock()
+    {
+        if(FindObjectOfType<PlayerStatus>().tryLeft > 0){
+            PV.RPC("testClick", RpcTarget.AllBuffered, tilePos, PhotonNetwork.LocalPlayer.ActorNumber);
+        }
+    }
+
+    IEnumerator Wait(float sec){
+        yield return new WaitForSeconds(sec);
+        blessed = FindObjectOfType<PlayerStatus>().GetBlessed();
+        Debug.Log("TileBehaviour Blessed: " + blessed);
+        yield return null;
+    }
+
+    public void testClick(int actor)
+    {   
+        if(FindObjectOfType<PlayerStatus>().tryLeft > 0)
         {
             Debug.Log(isSafe);
 
@@ -58,39 +79,40 @@ public class TileBehaviour : MonoBehaviour
         {
             if(tilePos == safePos)
             {
-            image.GetComponent<Image>().color = Color.cyan;
+                image.GetComponent<Image>().color = Color.cyan;
+                if(PhotonNetwork.LocalPlayer.ActorNumber == actor){
+                    PS.SetVictory();
+                }
             }
             else if(distX >= distY)
             {
-            if(distX>5)
-            {
-            image.GetComponent<Image>().color = Color.yellow;
+                if(distX>5)
+                {
+                image.GetComponent<Image>().color = Color.yellow;
+                }
+                else{
+                colorModifier = distX * 0.2f;
+                image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distX-5)*0.23f,0.016f - Mathf.Abs(distX-5)*0.004f,1f);
+                }
             }
             else{
-            colorModifier = distX * 0.2f;
-            image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distX-5)*0.23f,0.016f - Mathf.Abs(distX-5)*0.004f,1f);
-            }
-            
-
-            }
-            else{
-            if(distY>5)
-            {
-            image.GetComponent<Image>().color = Color.yellow;
-            }
-            else{
-            colorModifier = distX * 0.2f;
-            image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distY-5)*0.23f,0.016f - Mathf.Abs(distY-5)*0.004f,1f);
-            }
-            
+                if(distY>5)
+                {
+                image.GetComponent<Image>().color = Color.yellow;
+                }
+                else{
+                colorModifier = distX * 0.2f;
+                image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distY-5)*0.23f,0.016f - Mathf.Abs(distY-5)*0.004f,1f);
+                }
             }
         }
         else{
             image.GetComponent<Image>().color = Color.gray;
         }
-
-        FindObjectOfType<PlayerStatus>().Try();
+        if(PhotonNetwork.LocalPlayer.ActorNumber == actor){
+            FindObjectOfType<PlayerStatus>().Try();
         }
+    }
         
         
 
@@ -105,5 +127,4 @@ public class TileBehaviour : MonoBehaviour
 
         // }
     }
-
 }

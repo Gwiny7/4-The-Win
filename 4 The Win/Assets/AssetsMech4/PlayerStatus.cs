@@ -1,30 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
+using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
-
-
-    public bool blessed;
+    private blessStatus BS;
+    private bool blessed;
     public int maxTry;
-    public int qntPlayers;
     public int tryLeft;
+    public GameObject victoryScreen;
+    public GameObject blessedStatus;
+    public TMP_Text tryStatus;
     
+    void Awake(){
+        BS = GetComponent<blessStatus>();
+    }
     void Start()
     {
-        if(blessed)
-        {
-            tryLeft = 1;
-        }
-        else
-        {
-            tryLeft=maxTry/(qntPlayers-1);
+        StartCoroutine(Wait(5.0f));
+        
+    }
+
+    void Update(){
+        tryStatus.text = ("Tries Left: " + tryLeft);
+        if(blessed){
+            blessedStatus.SetActive(true);
         }
     }
 
     public void Try()
     {
         tryLeft--;
+    }
+
+    public bool GetBlessed(){
+        return blessed;
+    }
+
+    IEnumerator Wait(float sec){
+        yield return new WaitForSeconds(sec);
+        blessed = BS.IsBlessed();
+        Debug.Log("PlayerStatus Blessed: " + blessed);
+        if(blessed)
+        {
+            tryLeft = 1;
+        }
+        else
+        {
+            tryLeft=maxTry/(PhotonNetwork.CurrentRoom.PlayerCount - 1);
+        }
+        yield return null;
+    }
+
+    public void SetVictory(){
+        victoryScreen.SetActive(true);
     }
 }
