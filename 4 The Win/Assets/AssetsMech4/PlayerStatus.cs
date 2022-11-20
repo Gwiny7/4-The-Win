@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerStatus : MonoBehaviour
     public int maxTry;
     public int tryLeft;
     public GameObject victoryScreen;
+    public GameObject blessedStatus;
+    public TMP_Text tryStatus;
     
     void Awake(){
         BS = GetComponent<blessStatus>();
@@ -20,6 +23,13 @@ public class PlayerStatus : MonoBehaviour
     {
         StartCoroutine(Wait(5.0f));
         
+    }
+
+    void Update(){
+        tryStatus.text = ("Tries Left: " + tryLeft);
+        if(blessed){
+            blessedStatus.SetActive(true);
+        }
     }
 
     public void Try()
