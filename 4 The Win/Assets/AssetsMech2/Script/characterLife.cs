@@ -5,6 +5,7 @@ using UnityEngine;
 public class characterLife : MonoBehaviour
 {
     public int hitPoints;
+    public lifeStatus lStatus;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class characterLife : MonoBehaviour
         if(col.gameObject.tag=="Projectile"){
             Destroy(col.gameObject);
             hitPoints--;
+            lStatus.lostLife();
             //Debug.Log("Ainda tem:" + hitPoints);
         }
     }

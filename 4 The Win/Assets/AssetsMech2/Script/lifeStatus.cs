@@ -9,11 +9,13 @@ using TMPro;
 
 public class lifeStatus : MonoBehaviour
 {
-    private int lifePoints;
+    
     private int victoriesNeeded;
     private bool lose;
     private bool win;
-    public TextMeshProUGUI lifeText;
+    public List<GameObject> Lifes = new List<GameObject>();
+    private int lifesLeft; 
+    public Sprite brokenHeart;
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
     public GameObject nextButton;
@@ -25,7 +27,7 @@ public class lifeStatus : MonoBehaviour
         PV = GetComponent<PhotonView>();
         lose = false;
         win = false;
-        lifePoints = FindObjectOfType<characterLife>().GetLife();
+        lifesLeft = FindObjectOfType<characterLife>().GetLife();
     }
     void Update()
     {   
@@ -40,11 +42,10 @@ public class lifeStatus : MonoBehaviour
 
 
     void updateLifePoints(){
-        lifePoints = FindObjectOfType<characterLife>().GetLife();
-        lifeText.text = "Life Points: " + lifePoints;
+        lifesLeft = FindObjectOfType<characterLife>().GetLife();
     }
     void updateGameOver(){
-        if(lifePoints == 0 && FindObjectOfType<ProjectileSpawner>().GetStatus())
+        if(lifesLeft == 0 && FindObjectOfType<ProjectileSpawner>().GetStatus())
         { lose = true;
           gameOverPanel.SetActive(true);
           FindObjectOfType<ProjectileSpawner>().SetStatus(false);
@@ -63,6 +64,15 @@ public class lifeStatus : MonoBehaviour
                 victoryPanel.SetActive(true);
             }
         }
+    }
+
+    public void lostLife()
+    {
+        Lifes[lifesLeft-1].GetComponent<Image>().sprite = brokenHeart;
+        Lifes[lifesLeft-1].GetComponent<Image>().color = Color.white;
+        Lifes.Remove(Lifes[Lifes.Count-1]);
+        lifesLeft--;
+        Debug.Log("Lifes left: " + lifesLeft);
     }
     // void updateVictory(){
     //     // if(FindObjectOfType<GreatProjectileBehaviour>().GetStatus())
