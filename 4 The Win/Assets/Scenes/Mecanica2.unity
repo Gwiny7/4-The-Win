@@ -2349,8 +2349,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114726110}
         m_TargetAssemblyTypeName: ManageRoom, Assembly-CSharp
-        m_MethodName: OnClickAdvance
-        m_Mode: 3
+        m_MethodName: OnClickPassLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4154,8 +4154,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114726110}
         m_TargetAssemblyTypeName: ManageRoom, Assembly-CSharp
-        m_MethodName: OnClickAdvance
-        m_Mode: 3
+        m_MethodName: OnClickPassLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4935,7 +4935,6 @@ MonoBehaviour:
   qtdProjectiles: 16
   timeBetweenSpawns: 0.5
   alertTimer: 0.2
-  BS: {fileID: 0}
   blessed: 0
 --- !u!1 &2061052844
 GameObject:

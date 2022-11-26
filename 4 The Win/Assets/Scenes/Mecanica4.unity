@@ -2976,8 +2976,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1674641061}
         m_TargetAssemblyTypeName: ManageRoom, Assembly-CSharp
-        m_MethodName: OnClickAdvance
-        m_Mode: 3
+        m_MethodName: OnClickPassLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

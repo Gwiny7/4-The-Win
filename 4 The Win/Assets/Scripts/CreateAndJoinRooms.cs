@@ -18,7 +18,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
     public int[] PlayersActorOrder = { 0, 0, 0, 0 };
-
+    int nextIndex;
     public GameObject playButton;
 
     private void Awake(){
@@ -123,8 +123,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
+        nextIndex = Random.Range(2, 6);
+        PlayerArrayControl.currentLevel = nextIndex;
         PV.RPC("RPC_ListPlayers", RpcTarget.AllBuffered);
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(nextIndex);
     }
 
     private void JoinPlayerArray(){

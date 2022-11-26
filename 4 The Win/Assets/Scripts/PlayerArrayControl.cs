@@ -6,4 +6,7 @@ public class PlayerArrayControl : MonoBehaviour
 {
     static public int[] PlayersActorOrder = { 0, 0, 0, 0 };
     static public bool blessed = false;
+    static public int[] Levels = { 2, 3, 4, 5 };
+    static public int[] LevelsPassed = { 0, 0, 0, 0 };
+    static public int currentLevel = 0;
 }
