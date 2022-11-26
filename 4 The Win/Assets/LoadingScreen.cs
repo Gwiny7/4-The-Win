@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -22,9 +25,8 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator ButtonSpawner()
     {
         yield return new WaitForSeconds(timeToShow);
-
-        button.SetActive(true);
-
-
+        if(PhotonNetwork.IsMasterClient){
+            button.SetActive(true);
+        }
     }
 }

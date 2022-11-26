@@ -3644,7 +3644,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5651,7 +5651,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1813594849}
-  - component: {fileID: 1813594848}
   - component: {fileID: 1813594851}
   - component: {fileID: 1813594850}
   m_Layer: 0
@@ -5661,18 +5660,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1813594848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813594847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86e04e64c4556f4ab80f40b32132ede, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1813594849
 Transform:
   m_ObjectHideFlags: 0
@@ -5757,6 +5744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add35177648e5b94e8154b868a6d5b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  timeToShow: 0
 --- !u!114 &1821206168
 MonoBehaviour:
   m_ObjectHideFlags: 0

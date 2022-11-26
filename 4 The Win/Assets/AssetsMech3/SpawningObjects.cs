@@ -9,9 +9,6 @@ public class SpawningObjects : MonoBehaviour
     public List<GameObject> objects = new List<GameObject>();
     public List<GameObject> objImages = new List<GameObject>();
     private int[] password = new int[4];
-    
-
-
     private int qtdCircle;
     private int qtdSquare;
     private int qtdCross;

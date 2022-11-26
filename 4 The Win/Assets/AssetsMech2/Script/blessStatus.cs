@@ -34,6 +34,7 @@ public class blessStatus : MonoBehaviourPunCallbacks
         BlessedActorNumber = num;
         Debug.Log("Player Local: " + PhotonNetwork.LocalPlayer.ActorNumber);
         Debug.Log("Player Abençoado: " + BlessedActorNumber);
+        
         if(PhotonNetwork.LocalPlayer.ActorNumber == BlessedActorNumber){
             isBlessed = true;
         }
@@ -41,5 +42,7 @@ public class blessStatus : MonoBehaviourPunCallbacks
         else{
             isBlessed = false;
         }
+        
+        PlayerArrayControl.blessed = isBlessed;
     }
 }

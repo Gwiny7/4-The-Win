@@ -22,7 +22,8 @@ public class TileBehaviour : MonoBehaviour
     {
         PS = GameObject.Find("StatusManager").GetComponent<PlayerStatus>();
         PV = GameObject.Find("StatusManager").GetComponent<PhotonView>();
-        StartCoroutine(Wait(5.0f));        
+        blessed = FindObjectOfType<PlayerStatus>().GetBlessed();
+        Debug.Log("TileBehaviour Blessed: " + blessed);        
        // transform.SetParent(canvas.transform,false);
     }
 
@@ -52,13 +53,6 @@ public class TileBehaviour : MonoBehaviour
         if(FindObjectOfType<PlayerStatus>().tryLeft > 0){
             PV.RPC("testClick", RpcTarget.AllBuffered, tilePos, PhotonNetwork.LocalPlayer.ActorNumber);
         }
-    }
-
-    IEnumerator Wait(float sec){
-        yield return new WaitForSeconds(sec);
-        blessed = FindObjectOfType<PlayerStatus>().GetBlessed();
-        Debug.Log("TileBehaviour Blessed: " + blessed);
-        yield return null;
     }
 
     public void testClick(int actor)

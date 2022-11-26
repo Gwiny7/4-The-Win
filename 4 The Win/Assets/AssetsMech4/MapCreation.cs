@@ -7,7 +7,6 @@ public class MapCreation : MonoBehaviour
 {
     public Vector2 gridSize;
     public GameObject Tile;
-    
     public GameObject[,] tileMap;
     public GameObject canvas;
     private Vector3 initPosition;

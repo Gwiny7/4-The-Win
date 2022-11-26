@@ -9,7 +9,6 @@ using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private blessStatus BS;
     private PhotonView PV;
     private bool blessed;
     public int maxTry;
@@ -21,7 +20,6 @@ public class PlayerStatus : MonoBehaviour
     
     void Awake(){
         PV = GetComponent<PhotonView>();
-        BS = GetComponent<blessStatus>();
     }
     void Start()
     {
@@ -31,7 +29,16 @@ public class PlayerStatus : MonoBehaviour
             Lifes.Remove(Lifes[tryLeft]);
             Debug.Log("foi");
         }
-        StartCoroutine(Wait(5.0f));
+        blessed = PlayerArrayControl.blessed;
+        Debug.Log("PlayerStatus Blessed: " + blessed);
+        if(blessed)
+        {
+            tryLeft = 1;
+        }
+        else
+        {
+            tryLeft=maxTry/(PhotonNetwork.CurrentRoom.PlayerCount - 1);
+        }
         
     }
 
@@ -51,28 +58,13 @@ public class PlayerStatus : MonoBehaviour
     public bool GetBlessed(){
         return blessed;
     }
-
-    IEnumerator Wait(float sec){
-        yield return new WaitForSeconds(sec);
-        blessed = BS.IsBlessed();
-        Debug.Log("PlayerStatus Blessed: " + blessed);
-        if(blessed)
-        {
-            tryLeft = 1;
-        }
-        else
-        {
-            tryLeft=maxTry/(PhotonNetwork.CurrentRoom.PlayerCount - 1);
-        }
-        yield return null;
-    }
-
     public void SetVictory(){
         PV.RPC("RPC_Victory", RpcTarget.AllBuffered);
     }
 
     public void lostLife()
     {
+        //erro de índice aqui
         Lifes[tryLeft-1].GetComponent<Image>().sprite = brokenHeart;
         Lifes[tryLeft-1].GetComponent<Image>().color = Color.white;
         Lifes.Remove(Lifes[Lifes.Count-1]);
