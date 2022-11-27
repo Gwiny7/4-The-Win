@@ -388,6 +388,7 @@ MonoBehaviour:
   brokenHeart: {fileID: 21300000, guid: 6c50582ed25955d4789684e29c743bde, type: 3}
   victoryScreen: {fileID: 1503865808}
   blessedStatus: {fileID: 1774461933}
+  nextButton: {fileID: 1232323264}
 --- !u!4 &124588875
 Transform:
   m_ObjectHideFlags: 0
@@ -2908,7 +2909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1232323265
 RectTransform:
   m_ObjectHideFlags: 0

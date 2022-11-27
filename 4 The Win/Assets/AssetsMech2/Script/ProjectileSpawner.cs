@@ -17,7 +17,6 @@ public class ProjectileSpawner : MonoBehaviour
                              new Vector3 { x = -12f, y = -5f,z = 0f},
                              new Vector3 { x = -13f, y = -2f,z = 0f}};
 
-    public int randSeed;
     public int qtdProjectiles;
     private int randSpawner;
     public float timeBetweenSpawns;
@@ -32,7 +31,7 @@ public class ProjectileSpawner : MonoBehaviour
         blessed = PlayerArrayControl.blessed;
         isAlive = true;
         projectileLeft = qtdProjectiles;
-        Random.seed = randSeed;
+        Random.seed = PlayerArrayControl.RandomSeed;
         StartCoroutine(spawnProjectiles());
     }
 

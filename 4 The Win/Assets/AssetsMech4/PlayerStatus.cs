@@ -17,6 +17,7 @@ public class PlayerStatus : MonoBehaviour
     public Sprite brokenHeart;
     public GameObject victoryScreen;
     public GameObject blessedStatus;
+    public GameObject nextButton;
     
     void Awake(){
         PV = GetComponent<PhotonView>();
@@ -79,5 +80,8 @@ public class PlayerStatus : MonoBehaviour
 
     void RPC_Victory(){
         victoryScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButton.SetActive(true);
+        }
     }
 }

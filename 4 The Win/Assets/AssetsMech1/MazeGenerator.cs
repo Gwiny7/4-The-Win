@@ -173,6 +173,7 @@ public class MazeGenerator : MonoBehaviour
     }
 
     void Start(){
+        Random.seed = PlayerArrayControl.RandomSeed;
         visited = new bool[size,size];
         hwalls = new bool[size+1,size+1];
         vwalls = new bool[size+1,size+1];

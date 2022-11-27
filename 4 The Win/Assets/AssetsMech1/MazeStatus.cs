@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class MazeStatus : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class MazeStatus : MonoBehaviour
     public GameObject player;
     public GameObject cam;
     public Vector3 newCamView;
+    public GameObject victoryScreen;
+    public GameObject nextButton;
 
     private void Start() {
         blessed = PlayerArrayControl.blessed;
@@ -25,5 +29,13 @@ public class MazeStatus : MonoBehaviour
     public bool GetBlessed()
     {
         return blessed;
+    }
+
+    [PunRPC]
+    void RPC_SetVictory(){
+        victoryScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButton.SetActive(true);
+        }
     }
 }

@@ -13,15 +13,17 @@ public class blessStatus : MonoBehaviourPunCallbacks
     private int RandomValue;
     private int BlessedActorNumber;
     private bool isBlessed = false;
+    private int RandomizerSeed;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
         Seed = (int)Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
+        RandomizerSeed = (int)Random.Range(1, 65);
         
         if(PhotonNetwork.IsMasterClient){
             BlessedActorNumber = PlayerArrayControl.PlayersActorOrder[Seed];
-            PV.RPC("RPC_PassBlessed", RpcTarget.AllBuffered, BlessedActorNumber);
+            PV.RPC("RPC_PassBlessed", RpcTarget.AllBuffered, BlessedActorNumber, RandomizerSeed);
         }
     }
     
@@ -30,7 +32,7 @@ public class blessStatus : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void RPC_PassBlessed(int num){
+    void RPC_PassBlessed(int num, int seed){
         BlessedActorNumber = num;
         Debug.Log("Player Local: " + PhotonNetwork.LocalPlayer.ActorNumber);
         Debug.Log("Player Abençoado: " + BlessedActorNumber);
@@ -44,5 +46,6 @@ public class blessStatus : MonoBehaviourPunCallbacks
         }
         
         PlayerArrayControl.blessed = isBlessed;
+        PlayerArrayControl.RandomSeed = seed;
     }
 }

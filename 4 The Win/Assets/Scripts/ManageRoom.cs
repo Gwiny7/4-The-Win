@@ -24,6 +24,7 @@ public class ManageRoom : MonoBehaviourPunCallbacks
                 PlayerArrayControl.LevelsPassed[x] = PlayerArrayControl.currentLevel;
                 if(x == 3){
                     PhotonNetwork.LoadLevel("Finish");
+                    return;
                 }
                 break;
             }
