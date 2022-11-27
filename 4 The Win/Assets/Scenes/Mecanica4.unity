@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTry: 9
-  tryLeft: 5
+  tryLeft: 0
   Lifes:
   - {fileID: 2058728956}
   - {fileID: 1373923936}
@@ -2538,7 +2538,7 @@ Transform:
   m_GameObject: {fileID: 1024932756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0482, y: 0.9702, z: 0}
-  m_LocalScale: {x: 22.106146, y: 15.786529, z: 1}
+  m_LocalScale: {x: 133.47911, y: 95.32063, z: 6.0381}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4968,7 +4968,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

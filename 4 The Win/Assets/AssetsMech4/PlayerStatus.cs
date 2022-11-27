@@ -23,14 +23,7 @@ public class PlayerStatus : MonoBehaviour
     }
     void Start()
     {
-        for(int i=0; i<9-tryLeft;i++)
-        {
-            Destroy(Lifes[tryLeft]);
-            Lifes.Remove(Lifes[tryLeft]);
-            Debug.Log("foi");
-        }
         blessed = PlayerArrayControl.blessed;
-        Debug.Log("PlayerStatus Blessed: " + blessed);
         if(blessed)
         {
             tryLeft = 1;
@@ -39,6 +32,16 @@ public class PlayerStatus : MonoBehaviour
         {
             tryLeft=maxTry/(PhotonNetwork.CurrentRoom.PlayerCount - 1);
         }
+        
+        for(int i=0; i<9-tryLeft;i++)
+        {
+            Destroy(Lifes[tryLeft]);
+            Lifes.Remove(Lifes[tryLeft]);
+            Debug.Log("foi");
+        }
+        
+        Debug.Log("PlayerStatus Blessed: " + blessed);
+        
         
     }
 

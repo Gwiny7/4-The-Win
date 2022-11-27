@@ -15,16 +15,10 @@ public class DefineBlessed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Wait(5.0f));
-    }
-
-    IEnumerator Wait(float sec){
-        yield return new WaitForSeconds(sec);
         blessed = PlayerArrayControl.blessed;
         if(blessed){
             blessedScreen.SetActive(true);
         }
-        yield return null;
     }
 
     [PunRPC]
