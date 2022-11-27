@@ -987,7 +987,7 @@ MonoBehaviour:
   - {fileID: 601563770}
   - {fileID: 2016669067}
   lifesLeft: 3
-  demonLifesLeft: 2
+  demonLifesLeft: 4
   win: 1
 --- !u!1 &1443560411 stripped
 GameObject:
