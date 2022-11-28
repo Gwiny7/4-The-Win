@@ -11,12 +11,10 @@ public class MapCreation : MonoBehaviour
     public GameObject canvas;
     private Vector3 initPosition;
     private Vector2 safePoint;
-    public int randSeed;
     
-
     void Start()
     {
-        Random.seed = randSeed;
+        Random.seed = PlayerArrayControl.RandomSeed;
         safePoint = new Vector2((int)Random.Range(0,gridSize.x),(int)Random.Range(0,gridSize.y));
         initPosition = transform.position;
         tileMap = new GameObject[(int)gridSize.x,(int)gridSize.y];

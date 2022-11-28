@@ -16,7 +16,10 @@ public class PlayerStatus : MonoBehaviour
     public List<GameObject> Lifes = new List<GameObject>();
     public Sprite brokenHeart;
     public GameObject victoryScreen;
+    public GameObject defeatScreen;
     public GameObject blessedStatus;
+    public GameObject nextButton;
+    public GameObject nextButtonD;
     
     void Awake(){
         PV = GetComponent<PhotonView>();
@@ -64,6 +67,9 @@ public class PlayerStatus : MonoBehaviour
     public void SetVictory(){
         PV.RPC("RPC_Victory", RpcTarget.AllBuffered);
     }
+    public void SetDefeat(){
+        PV.RPC("RPC_Defeat", RpcTarget.AllBuffered);
+    }
 
     public void lostLife()
     {
@@ -79,5 +85,17 @@ public class PlayerStatus : MonoBehaviour
 
     void RPC_Victory(){
         victoryScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButton.SetActive(true);
+        }
+    }
+
+    [PunRPC]
+
+    void RPC_Defeat(){
+        defeatScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButtonD.SetActive(true);
+        }
     }
 }

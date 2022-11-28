@@ -8,14 +8,18 @@ public class PartyLifeManager : MonoBehaviour
     public GameObject[] lifes = new GameObject[3];
     public GameObject[] demonLifes = new GameObject[3];
     private int TotalLifes = 3;
-    public int lifesLeft;
+    int lifesLeft;
     private int TotalDemonLifes = 4;
-    public int demonLifesLeft;
-    public bool win;
+    int demonLifesLeft;
+    bool win;
 
   
     void Start()
     {
+        win = PlayerArrayControl.win;
+        lifesLeft = PlayerArrayControl.PartyLife;
+        demonLifesLeft = PlayerArrayControl.DemonLife;
+        
         if(win)
         {
             if(TotalDemonLifes > demonLifesLeft)

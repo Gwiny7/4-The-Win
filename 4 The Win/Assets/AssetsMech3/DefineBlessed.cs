@@ -12,6 +12,8 @@ public class DefineBlessed : MonoBehaviour
     bool blessed;
     public GameObject victoryScreen;
     public GameObject nextButton;
+    public GameObject defeatScreen;
+    public GameObject nextButtonD;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,14 @@ public class DefineBlessed : MonoBehaviour
         victoryScreen.SetActive(true);
         if(PhotonNetwork.IsMasterClient){
             nextButton.SetActive(true);
+        }
+    }
+
+    [PunRPC]
+    void RPC_Defeat(){
+        defeatScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButtonD.SetActive(true);
         }
     }
 }

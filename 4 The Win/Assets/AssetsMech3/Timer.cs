@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class Timer : MonoBehaviour 
 {
@@ -16,6 +18,9 @@ public class Timer : MonoBehaviour
     private int remainingDuration;
 
     private bool Pause;
+
+    public GameObject defeatScreen;
+    public GameObject nextButton;
 
     private void Start()
     {
@@ -47,6 +52,10 @@ public class Timer : MonoBehaviour
     private void OnEnd()
     {
         //End Time , if want Do something
+        defeatScreen.SetActive(true);
+        if(PhotonNetwork.IsMasterClient){
+            nextButton.SetActive(true);
+        }
         print("End");
     }
 }

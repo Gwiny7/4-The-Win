@@ -16,15 +16,13 @@ public class SpawningObjects : MonoBehaviour
     private int qtdDiamond;
     private int qtdHeart;
     private int qtdStar;
-
-    public int randSeed;
     public int numberOfRows;
     private int objSelector;
     private int qtdTotal;
     
     void Start()
     {
-        Random.seed = randSeed;
+        Random.seed = PlayerArrayControl.RandomSeed;
         qtdTotal=0;
         resetQtd();
         Spawn();

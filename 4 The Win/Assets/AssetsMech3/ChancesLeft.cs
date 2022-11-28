@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 
 public class ChancesLeft : MonoBehaviour
 {   
    
     public List<GameObject> Lifes = new List<GameObject>();
-    private int lifesLeft;    
+    private int lifesLeft;
+    public PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +39,9 @@ public class ChancesLeft : MonoBehaviour
         Lifes[Lifes.Count-1].SetActive(false);
         Lifes.Remove(Lifes[Lifes.Count-1]);
         lifesLeft--;
+        if(lifesLeft <= 0){
+            PV.RPC("RPC_Defeat", RpcTarget.AllBuffered);
+        }
         Debug.Log("Lifes left: " + lifesLeft);
     }
 
