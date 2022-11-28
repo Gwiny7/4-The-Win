@@ -18,6 +18,7 @@ public class PlayerStatus : MonoBehaviour
     public GameObject victoryScreen;
     public GameObject defeatScreen;
     public GameObject blessedStatus;
+    public GameObject blessedStatusShadow;
     public GameObject nextButton;
     public GameObject nextButtonD;
     
@@ -52,6 +53,7 @@ public class PlayerStatus : MonoBehaviour
         
         if(blessed){
             blessedStatus.SetActive(true);
+            blessedStatusShadow.SetActive(true);
         }
 
     }
