@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2503752140668766108}
   m_Layer: 0
   m_Name: GreatProjectile
-  m_TagString: Projectile
+  m_TagString: GreatProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 1
   deadProjectile: {fileID: 4838060724582210434, guid: 678f426fd0726e949bb441ac165e65d9, type: 3}
-  projectileHP: 10
+  projectileHP: 35
 --- !u!58 &8439574108784724909
 CircleCollider2D:
   m_ObjectHideFlags: 0

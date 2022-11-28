@@ -30,6 +30,17 @@ public class characterLife : MonoBehaviour
             lStatus.lostLife();
             //Debug.Log("Ainda tem:" + hitPoints);
         }
+
+        if(col.gameObject.tag=="GreatProjectile"){
+            Destroy(col.gameObject);
+            for(int i=0;i<hitPoints;i++)
+            {
+                hitPoints--;
+                lStatus.lostLife();
+            }
+            
+            //Debug.Log("Ainda tem:" + hitPoints);
+        }
     }
 
     public int GetLife(){

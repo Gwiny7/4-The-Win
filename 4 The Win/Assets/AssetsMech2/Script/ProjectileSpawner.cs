@@ -43,7 +43,7 @@ public class ProjectileSpawner : MonoBehaviour
 
     IEnumerator spawnProjectiles()
     {
-        
+        yield return new WaitForSeconds(1f);
             for(int i=0 ; i<qtdProjectiles ; i++)
             {  
                 if(isAlive){
@@ -57,9 +57,9 @@ public class ProjectileSpawner : MonoBehaviour
                     alertPosition = alertPosition - Vector3.Scale(alertPosition.normalized, new Vector3(5,5,1));
                     alertPosition = -alertPosition;
                     //Debug.Log(alertPosition);
-                    Instantiate(Alert,alertPosition,Quaternion.identity);
-                    yield return new WaitForSeconds(alertTimer);
+                    Instantiate(Alert,alertPosition,Quaternion.identity);  
                 }
+                yield return new WaitForSeconds(alertTimer);
                     if(i==qtdProjectiles-1){
                         Instantiate(GreatProjectile,transform.position,transform.rotation);
                         yield return new WaitForSeconds(timeBetweenSpawns);
