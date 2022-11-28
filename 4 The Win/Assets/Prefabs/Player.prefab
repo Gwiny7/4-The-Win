@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 1207319956062386805}
   backgroundImage: {fileID: 4282119476961323685}
-  highlightColor: {r: 0.3130437, g: 0.6415094, b: 0.25720897, a: 0.74509805}
+  highlightColor: {r: 0.43747574, g: 0.8113208, b: 0.35590956, a: 0.74509805}
   leftArrowButton: {fileID: 1345467859733251993}
   rightArrowButton: {fileID: 6737365362897883248}
   playerAvatar: {fileID: 3951835966769879522}
@@ -514,8 +514,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cdf45935c858f144b9a101d711525442, type: 2}
+  m_sharedMaterial: {fileID: -4175753835658404245, guid: cdf45935c858f144b9a101d711525442, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -539,8 +539,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

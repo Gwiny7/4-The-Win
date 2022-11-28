@@ -13,6 +13,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public TMP_Text roomName;
+    public TMP_Text roomName_shadow;
     private PhotonView PV;
     public List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
@@ -45,6 +46,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
+        roomName_shadow.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
         JoinPlayerArray();
         UpdatePlayerList();
     }
