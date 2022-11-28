@@ -11,6 +11,7 @@ public class lifeStatus : MonoBehaviour
 {
     
     private int victoriesNeeded;
+    private int Defeats = 0;
     private bool lose;
     private bool win;
     public List<GameObject> Lifes = new List<GameObject>();
@@ -19,7 +20,7 @@ public class lifeStatus : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject victoryPanel;
     public GameObject nextButton;
-    public GameObject nextButtonDeath;
+    public GameObject nextButtonD;
     private PhotonView PV;
 
     void Start(){
@@ -36,7 +37,10 @@ public class lifeStatus : MonoBehaviour
         updateVictory();
         if(PhotonNetwork.IsMasterClient && victoriesNeeded <= 0){
             nextButton.SetActive(true);
-            nextButtonDeath.SetActive(true);
+        }
+        if(PhotonNetwork.IsMasterClient && Defeats >= 2){
+            gameOverPanel.SetActive(true);
+            nextButtonD.SetActive(true);
         }
     }
 
@@ -48,6 +52,7 @@ public class lifeStatus : MonoBehaviour
         if(lifesLeft == 0 && FindObjectOfType<ProjectileSpawner>().GetStatus())
         { lose = true;
           gameOverPanel.SetActive(true);
+          PV.RPC("RPC_Lost", RpcTarget.AllBuffered);
           FindObjectOfType<ProjectileSpawner>().SetStatus(false);
         }
     }
@@ -84,6 +89,12 @@ public class lifeStatus : MonoBehaviour
 
     void RPC_PlayerWin(){
         victoriesNeeded--;
+    }
+
+    [PunRPC]
+
+    void RPC_Lost(){
+        Defeats++;
     }
 }
 

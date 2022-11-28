@@ -88,6 +88,9 @@ public class TileBehaviour : MonoBehaviour
                 colorModifier = distX * 0.2f;
                 image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distX-5)*0.23f,0.016f - Mathf.Abs(distX-5)*0.004f,1f);
                 }
+                if(PhotonNetwork.LocalPlayer.ActorNumber == actor){
+                    PS.SetDefeat();
+                }
             }
             else{
                 if(distY>5)
@@ -97,6 +100,9 @@ public class TileBehaviour : MonoBehaviour
                 else{
                 colorModifier = distX * 0.2f;
                 image.GetComponent<Image>().color = new Color(1f ,0.92f - Mathf.Abs(distY-5)*0.23f,0.016f - Mathf.Abs(distY-5)*0.004f,1f);
+                }
+                if(PhotonNetwork.LocalPlayer.ActorNumber == actor){
+                    PS.SetDefeat();
                 }
             }
         }

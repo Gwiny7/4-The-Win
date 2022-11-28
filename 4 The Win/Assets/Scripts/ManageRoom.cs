@@ -48,7 +48,7 @@ public class ManageRoom : MonoBehaviourPunCallbacks
             }
         }while(pass == false);
         PlayerArrayControl.currentLevel = nextIndex;
-        PhotonNetwork.LoadLevel(PlayerArrayControl.currentLevel);
+        PhotonNetwork.LoadLevel("WinLossScreen");
     }
 
     public void OnClickLostLevel(){
@@ -64,7 +64,7 @@ public class ManageRoom : MonoBehaviourPunCallbacks
             }
         }while(pass == false);
         PlayerArrayControl.currentLevel = nextIndex;
-        PhotonNetwork.LoadLevel(PlayerArrayControl.currentLevel);
+        PhotonNetwork.LoadLevel("WinLossScreen");
     }
 
     public override void OnLeftRoom(){

@@ -6,6 +6,7 @@ using Photon.Pun.UtilityScripts;
 
 public class MazeStatus : MonoBehaviour
 {
+    private int victoriesNeeded;
     private bool blessed;
     public GameObject fog;
     public GameObject player;
@@ -15,6 +16,13 @@ public class MazeStatus : MonoBehaviour
     public GameObject nextButton;
 
     private void Start() {
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2){
+            victoriesNeeded = PhotonNetwork.CurrentRoom.PlayerCount - 1;
+        }
+        else{
+            victoriesNeeded = PhotonNetwork.CurrentRoom.PlayerCount - 2;
+        }
+
         blessed = PlayerArrayControl.blessed;
         if(blessed)
         {   
@@ -26,6 +34,15 @@ public class MazeStatus : MonoBehaviour
         }
     }
 
+    private void Update(){
+        if(victoriesNeeded <= 0){
+            victoryScreen.SetActive(true);
+            if(PhotonNetwork.IsMasterClient){
+                nextButton.SetActive(true);
+            }
+        }
+    }
+
     public bool GetBlessed()
     {
         return blessed;
@@ -33,9 +50,6 @@ public class MazeStatus : MonoBehaviour
 
     [PunRPC]
     void RPC_SetVictory(){
-        victoryScreen.SetActive(true);
-        if(PhotonNetwork.IsMasterClient){
-            nextButton.SetActive(true);
-        }
+        victoriesNeeded--;
     }
 }
