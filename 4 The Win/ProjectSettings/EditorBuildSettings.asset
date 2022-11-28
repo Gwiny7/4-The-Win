@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Finish.unity
     guid: 14e51dc2718a2da4eaf17941fb545267
   - enabled: 1
+    path: Assets/Scenes/LostFinish.unity
+    guid: 55eab37a2e21c33449579b74e876bda5
+  - enabled: 1
     path: Assets/Scenes/WinLossScreen.unity
     guid: 93bfce00641d32e4189eaeda2d2285de
   m_configObjects: {}

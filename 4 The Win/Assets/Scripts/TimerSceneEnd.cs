@@ -17,7 +17,12 @@ public class TimerSceneEnd : MonoBehaviour
     IEnumerator SkipScene(){
         yield return new WaitForSeconds(time);
         if(PhotonNetwork.IsMasterClient){
-            PhotonNetwork.LoadLevel(PlayerArrayControl.currentLevel);
+            if(PlayerArrayControl.PartyLife > 0){
+                PhotonNetwork.LoadLevel(PlayerArrayControl.currentLevel);
+            }
+            else{
+                PhotonNetwork.LoadLevel("LostFinish");
+            }
         }
     }
 }
